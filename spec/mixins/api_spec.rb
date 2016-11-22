@@ -58,7 +58,7 @@ describe Nihaopay::Api do
 
       context 'when parsed_response contains :id' do
         let(:parsed_response) { { 'id' => '20160714132438002485', 'code' => 200 } }
-        it { expect { ApiTest.validate_resource!(response) }.to_not raise_error(Nihaopay::TransactionError) }
+        it { expect { ApiTest.validate_resource!(response) }.to_not raise_error }
       end
     end
 
@@ -74,7 +74,7 @@ describe Nihaopay::Api do
 
       context 'when parsed_response contains :transactions' do
         let(:parsed_response) { { 'transactions' => [{ 'id' => '20160714132438002485', 'code' => 200 }] } }
-        it { expect { ApiTest.validate_collection!(response) }.to_not raise_error(Nihaopay::TransactionError) }
+        it { expect { ApiTest.validate_collection!(response) }.to_not raise_error }
       end
     end
   end
