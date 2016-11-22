@@ -3,12 +3,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'nihaopay/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'nihaopay'
+  s.name          = 'nihaopay-ruby'
   s.version       = Nihaopay::VERSION
-  s.authors       = ['JagdeepSingh']
-  s.email         = ['jagdeepsingh.fof@gmail.com']
-  s.description   = 'Library to integrate Nihaopay Payment Gateway API'
-  s.summary       = 'Library to integrate Nihaopay Payment Gateway API'
+  s.authors       = ['JagdeepSingh', 'Johnny Shields']
+  s.email         = ['jagdeepsingh.fof@gmail.com', 'johnny.shields@gmail.com']
+  s.description   = 'Ruby library for Nihaopay payment gateway API'
+  s.summary       = 'Ruby library for Nihaopay payment gateway API'
 
   s.files         = Dir['{lib,spec}/**/*'] + %w(README.md CHANGELOG.md LICENSE)
   s.test_files    = s.files.grep(%r{^spec/})
