@@ -93,7 +93,7 @@ describe Nihaopay::Query do
         let(:parsed_response) do
           { 'id' => '20160718111604002633', 'type' => 'charge', 'status' => 'success' }
         end
-        it { expect { described_class.fetch }.to raise_error }
+        it { expect { described_class.fetch }.to raise_error(Nihaopay::TransactionLookUpError) }
       end
 
       context 'when response contains :transactions' do

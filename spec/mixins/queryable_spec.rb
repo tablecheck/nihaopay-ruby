@@ -37,7 +37,8 @@ describe Nihaopay::Queryable do
             'amount' => 1000 }
         end
         it 'should raise an error' do
-          expect { Nihaopay::Transactions::Base.find('20160714132438002485') }.to raise_error
+          err = Nihaopay::TransactionLookUpError
+          expect { Nihaopay::Transactions::Base.find('20160714132438002485') }.to raise_error(err)
         end
       end
 

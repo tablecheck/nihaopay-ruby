@@ -4,5 +4,11 @@ Documentation:
 Style/RescueModifier:
   Enabled: false
 
+Style/SignalException:
+  EnforcedStyle: semantic
+
 Metrics/LineLength:
   Max: 120
+
+EndOfLine:
+  Enabled: false
