@@ -5,7 +5,7 @@
 Nihaopay Ruby is a Ruby wrapper for using the [Nihaopay](https://www.nihaopay.com) payment gateway API.
 
 This library is provided by [KK VESPER](https://www.kkvesper.jp/) and is not affiliated
-with or supported by [Aurfy Inc](https://www.nihaopay.com), makers of Nihaopay
+with or supported by [Aurfy Inc](https://www.nihaopay.com), makers of Nihaopay.
 
 
 ## Installation
@@ -28,7 +28,7 @@ Nihaopay.configure do |nihaopay|
 end
 ```
 
-The default value for `test_mode` is `false`. Default `currency` is 'USD'.
+The default value for `test_mode` is `false`. Default `currency` is `'USD'`.
 
 
 ## Initiate a SecurePay transaction
@@ -43,9 +43,9 @@ response = Nihaopay::SecurePay::UnionPay.start(amount, currency, options)
 render inline: "<%= response.body %>"
 ```
 
-`amount` should be an integer of the smallest unit in the currency. e.g. $10.50 in USD would be 1050.
+`amount` should be an integer of the minor unit in the currency, e.g. $10.50 in USD would be 1050.
 
-`currency` can be *USD* and *JPY*.
+`currency` can be `'USD'` and `'JPY'`.
 
 **Options:**
 

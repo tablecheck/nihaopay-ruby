@@ -24,7 +24,7 @@ describe Nihaopay::CreditCard do
     end
 
     context 'when attributes passed as stringified hash' do
-      subject { described_class.new(attributes.stringify_keys) }
+      subject { described_class.new(Nihaopay::HashUtil.stringify_keys(attributes)) }
       it { expect(subject.number).to eq number }
       it { expect(subject.expiry_year).to eq 17 }
       it { expect(subject.expiry_month).to eq 11 }

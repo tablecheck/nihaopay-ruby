@@ -146,7 +146,7 @@ describe Nihaopay::Transactions::Base do
 
     context 'with options with string keys' do
       let(:options) do
-        opts = attrs.stringify_keys
+        opts = Nihaopay::HashUtil.stringify_keys(attrs)
         opts['id'] = '123456'
         opts.delete('transaction_id')
         opts

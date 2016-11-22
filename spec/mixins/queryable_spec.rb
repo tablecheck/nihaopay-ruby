@@ -8,17 +8,17 @@ describe Nihaopay::Queryable do
 
       describe '.limit' do
         it { expect(q).to receive(:limit) }
-        after { Nihaopay::Transactions::Base.limit }
+        after { Nihaopay::Transactions::Base.limit(1) }
       end
 
       describe '.before' do
         it { expect(q).to receive(:before) }
-        after { Nihaopay::Transactions::Base.before }
+        after { Nihaopay::Transactions::Base.before(Time.now) }
       end
 
       describe '.after' do
         it { expect(q).to receive(:after) }
-        after { Nihaopay::Transactions::Base.after }
+        after { Nihaopay::Transactions::Base.after(Time.now) }
       end
     end
 

@@ -1,6 +1,6 @@
-require 'active_support'
-require 'active_support/core_ext'
 require 'httparty'
+
+require 'nihaopay/util/hash_util'
 
 require 'nihaopay/mixins/api'
 require 'nihaopay/mixins/queryable'

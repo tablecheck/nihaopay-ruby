@@ -9,7 +9,7 @@ module Nihaopay
         def start(transaction_id, amount, currency, options = {})
           @token = options.delete(:token)
           url = request_url(transaction_id)
-          params = options.slice(*VALID_OPTIONS).merge(amount: amount, currency: currency)
+          params = Nihaopay::HashUtil.slice(options, *VALID_OPTIONS).merge(amount: amount, currency: currency)
           response = HTTParty.post(url, headers: request_headers, body: request_body(params))
           build_from_response!(response)
         end

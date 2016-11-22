@@ -1,6 +1,9 @@
 module Nihaopay
   module Api
-    extend ::ActiveSupport::Concern
+
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
 
     LIVE_HOST = 'https://api.nihaopay.com'.freeze
     TEST_HOST = 'http://api.test.nihaopay.com'.freeze
