@@ -1,5 +1,7 @@
 # Nihaopay Ruby
 
+[![Build Status](https://travis-ci.org/kkvesper/nihaopay-ruby.svg?branch=master)](https://travis-ci.org/kkvesper/nihaopay-ruby)
+
 Nihaopay Ruby is a Ruby wrapper for using the [Nihaopay](https://www.nihaopay.com) payment gateway API.
 
 This library is provided by [KK VESPER](https://www.kkvesper.jp/) and is not affiliated
