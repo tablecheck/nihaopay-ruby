@@ -1,0 +1,18 @@
+rvm:
+  - 2.0.0
+  - 2.1.9
+  - 2.2.5
+  - 2.3.1
+  - rbx
+  - jruby
+
+matrix:
+  allow_failures:
+    - rvm: rbx
+    - rvm: jruby
+
+sudo: false
+
+script:
+  - bundle exec rubocop
+  - bundle exec rspec
