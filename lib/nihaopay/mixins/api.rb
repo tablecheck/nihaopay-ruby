@@ -1,6 +1,5 @@
 module Nihaopay
   module Api
-
     def self.included(base)
       base.extend(ClassMethods)
     end

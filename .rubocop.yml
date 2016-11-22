@@ -1,8 +1,8 @@
 Documentation:
   Enabled: false
 
+Style/RescueModifier:
+  Enabled: false
+
 Metrics/LineLength:
   Max: 120
-
-Metrics/BlockLength:
-  Max: 175

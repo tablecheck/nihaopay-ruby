@@ -1,32 +1,29 @@
+# Emulates Hash methods from ActiveSupport without monkey-patching the Hash class directly.
 module Nihaopay
-
-  # Emulates Hash methods from ActiveSupport without monkey-patching the Hash class directly.
   module HashUtil
-
     class << self
-
       def symbolize_keys(hash)
-        _result = Hash.new
+        result = {}
         hash.each_key do |key|
-          _result[(key.to_sym rescue key)] = hash[key]
+          result[(key.to_sym rescue key)] = hash[key]
         end
-        _result
+        result
       end
 
       def stringify_keys(hash)
-        _result = Hash.new
+        result = {}
         hash.each_key do |key|
-          _result[(key.to_s rescue key)] = hash[key]
+          result[(key.to_s rescue key)] = hash[key]
         end
-        _result
+        result
       end
 
       def slice(hash, *keys)
-        _result = Hash.new
+        result = {}
         keys.each do |key|
-          _result[key] = hash[key] if hash.has_key?(key)
+          result[key] = hash[key] if hash.key?(key)
         end
-        _result
+        result
       end
     end
   end

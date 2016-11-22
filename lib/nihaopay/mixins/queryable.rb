@@ -1,12 +1,10 @@
 module Nihaopay
   module Queryable
-
     def self.included(base)
       base.extend(ClassMethods)
     end
 
     module ClassMethods
-
       def find(transaction_id)
         url = "#{base_url}/transactions/#{transaction_id}"
         response = HTTParty.get(url, headers: request_headers)
