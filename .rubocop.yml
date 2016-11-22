@@ -7,6 +7,10 @@ Style/RescueModifier:
 Style/SignalException:
   EnforcedStyle: semantic
 
+Style/FileName:
+  Exclude:
+    - 'lib/nihaopay-ruby.rb'
+
 Metrics/LineLength:
   Max: 120
 
