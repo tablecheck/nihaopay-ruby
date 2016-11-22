@@ -8,17 +8,17 @@ describe Nihaopay::Queryable do
 
       describe '.limit' do
         it { expect(q).to receive(:limit) }
-        after { Nihaopay::Transactions::Base.limit }
+        after { Nihaopay::Transactions::Base.limit(1) }
       end
 
       describe '.before' do
         it { expect(q).to receive(:before) }
-        after { Nihaopay::Transactions::Base.before }
+        after { Nihaopay::Transactions::Base.before(Time.now) }
       end
 
       describe '.after' do
         it { expect(q).to receive(:after) }
-        after { Nihaopay::Transactions::Base.after }
+        after { Nihaopay::Transactions::Base.after(Time.now) }
       end
     end
 
@@ -37,7 +37,8 @@ describe Nihaopay::Queryable do
             'amount' => 1000 }
         end
         it 'should raise an error' do
-          expect { Nihaopay::Transactions::Base.find('20160714132438002485') }.to raise_error
+          err = Nihaopay::TransactionLookUpError
+          expect { Nihaopay::Transactions::Base.find('20160714132438002485') }.to raise_error(err)
         end
       end
 

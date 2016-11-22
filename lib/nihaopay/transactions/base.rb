@@ -52,8 +52,8 @@ module Nihaopay
         end
 
         def build(options = {})
-          options.symbolize_keys!
-          attributes = options.slice(*valid_attributes)
+          options = Nihaopay::HashUtil.symbolize_keys(options)
+          attributes = Nihaopay::HashUtil.slice(options, *valid_attributes)
           attributes[:token] ||= merchant_token
           response_keys_map.each { |k, v| attributes[v] = options[k] }
           new(attributes)

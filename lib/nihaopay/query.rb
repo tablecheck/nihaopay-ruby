@@ -27,7 +27,7 @@ module Nihaopay
     class << self
       def fetch(options = {})
         query = query_params(options)
-        response = if query.present?
+        response = if query && !query.empty?
                      HTTParty.get(url, headers: request_headers, query: query)
                    else
                      HTTParty.get(url, headers: request_headers)
@@ -46,7 +46,7 @@ module Nihaopay
       end
 
       def query_params(options)
-        options.slice(*VALID_OPTIONS).reject { |_, v| v.blank? }
+        Nihaopay::HashUtil.slice(options, *VALID_OPTIONS).select { |_, v| v && (!v.respond_to?(:empty?) || !v.empty?) }
       end
 
       def build_transactions(response)

@@ -1,8 +1,14 @@
 Documentation:
   Enabled: false
 
+Style/RescueModifier:
+  Enabled: false
+
+Style/SignalException:
+  EnforcedStyle: semantic
+
 Metrics/LineLength:
   Max: 120
 
-Metrics/BlockLength:
-  Max: 175
+EndOfLine:
+  Enabled: false

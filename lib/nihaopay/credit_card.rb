@@ -5,7 +5,7 @@ module Nihaopay
     attr_accessor(*ATTRIBUTES)
 
     def initialize(attributes = {})
-      attributes.symbolize_keys!
+      attributes = Nihaopay::HashUtil.symbolize_keys(attributes)
       assign_attributes(attributes)
     end
 

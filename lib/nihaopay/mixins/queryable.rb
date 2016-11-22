@@ -1,10 +1,10 @@
 module Nihaopay
   module Queryable
-    extend ::ActiveSupport::Concern
+    def self.included(base)
+      base.extend(ClassMethods)
+    end
 
     module ClassMethods
-      delegate :limit, :before, :after, to: :q
-
       def find(transaction_id)
         url = "#{base_url}/transactions/#{transaction_id}"
         response = HTTParty.get(url, headers: request_headers)
@@ -17,6 +17,18 @@ module Nihaopay
         options[:starting_after] = options.delete(:after) if options[:after]
         options[:ending_before] = options.delete(:before) if options[:before]
         q.fetch(options)
+      end
+
+      def limit(num)
+        q.limit(num)
+      end
+
+      def before(time)
+        q.before(time)
+      end
+
+      def after(time)
+        q.after(time)
       end
 
       private

@@ -17,7 +17,7 @@ module Nihaopay
         def request_params(amount, credit_card, options)
           params = {}
           params.merge! credit_card.to_params_hash
-          params.merge! options.slice(*valid_options)
+          params.merge! Nihaopay::HashUtil.slice(options, *valid_options)
           params[:capture] = capture_param
           params[:amount] = amount
           params[:currency] ||= Nihaopay.currency
