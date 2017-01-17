@@ -11,6 +11,10 @@ Style/FileName:
   Exclude:
     - 'lib/nihaopay-ruby.rb'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
 Metrics/LineLength:
   Max: 120
 

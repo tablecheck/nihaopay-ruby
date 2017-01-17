@@ -17,7 +17,7 @@ module Nihaopay
         end
 
         def valid_attributes
-          %i(transaction_id status captured capture_transaction_id)
+          %i(transaction_id status captured capture_transaction_id time)
         end
 
         def response_keys_map
