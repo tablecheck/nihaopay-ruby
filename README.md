@@ -146,6 +146,7 @@ express_pay.reference        # => "3461fcc31aec471780ad1a4dc6111947"
 express_pay.currency         # => "JPY"
 express_pay.amount           # => 1000
 express_pay.captured         # => false
+express_pay.time             # => "2017-01-17T17:51:00+0900"
 ```
 
 Other methods available are `note` and `time`.
@@ -179,6 +180,7 @@ captured.transaction_id           # => "20160718111604002633"
 captured.status                   # => "success"
 captured.captured                 # => true
 captured.capture_transaction_id   # => "20160718111529002632" (id of the transaction that was captured)
+captured.time                     # => "2017-01-17T17:51:00+0900"
 ```
 
 If you want to capture a partial amount, you can do:
@@ -199,6 +201,7 @@ released.transaction_id           # => "20160718111604002633"
 released.status                   # => "success"
 released.released                 # => true
 released.release_transaction_id   # => "20160718111529002632" (id of the transaction that was released)
+released.time                     # => "2017-01-17T17:51:00+0900"
 ```
 
 #### Cancel a transaction
@@ -209,6 +212,7 @@ cancelled.transaction_id            # => "20160718111604002633"
 cancelled.status                    # => "success"
 cancelled.cancelled                 # => true
 cancelled.cancel_transaction_id     # => "20160718111529002632" (id of the transaction that was cancelled)
+cancelled.time                      # => "2017-01-17T17:51:00+0900"
 ```
 
 Transactions can only be cancelled before the daily settlement deadline. Transactions cannot be cancelled if a partial or full refund on the transaction has already been issued.
@@ -285,6 +289,7 @@ refunded.transaction_id            # => "20160718111604002633"
 refunded.status                    # => "success"
 refunded.refunded                  # => true
 refunded.refund_transaction_id     # => "20160718111529002632" (id of the transaction that was refunded)
+refunded.time                      # => "2017-01-17T17:51:00+0900"
 ```
 
 You can pass a `reason` when refunding a transaction:
