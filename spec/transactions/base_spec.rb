@@ -142,6 +142,7 @@ describe Nihaopay::Transactions::Base do
       it { expect(subject.transaction_id).to eq '123456' }
       it { expect(subject.token).to eq 'merchanttoken2' }
       it { expect(subject.captured).to be true }
+      it { expect(subject.time).to eq '2016-06-01T01:00:00Z' }
     end
 
     context 'with options with string keys' do
@@ -167,6 +168,17 @@ describe Nihaopay::Transactions::Base do
       subject { described_class.build(options) }
       it { is_expected.to be_a Nihaopay::Transactions::Base }
       it { expect(subject.token).to eq 'merchanttoken1' }
+    end
+
+    context 'when time not returned in response' do
+      let(:options) do
+        opts = attrs.merge(id: '123456')
+        opts.delete(:time)
+        opts
+      end
+      before { allow(Time).to receive_message_chain(:now, :strftime) { '2017-01-17T16:00:00+0900' } }
+      subject { described_class.build(options) }
+      it { expect(subject.time).to eq '2017-01-17T16:00:00+0900' }
     end
   end
 

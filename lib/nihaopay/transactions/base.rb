@@ -4,6 +4,8 @@ module Nihaopay
       include ::Nihaopay::Api
       include ::Nihaopay::Queryable
 
+      TIME_FORMAT = '%Y-%m-%dT%H:%M:%S%z'.freeze
+
       attr_accessor :token, :transaction_id, :type, :status
       attr_accessor :captured, :reference, :currency, :amount, :note, :time
 
@@ -55,6 +57,7 @@ module Nihaopay
           options = Nihaopay::HashUtil.symbolize_keys(options)
           attributes = Nihaopay::HashUtil.slice(options, *valid_attributes)
           attributes[:token] ||= merchant_token
+          attributes[:time] ||= Time.now.strftime(TIME_FORMAT)
           response_keys_map.each { |k, v| attributes[v] = options[k] }
           new(attributes)
         end
