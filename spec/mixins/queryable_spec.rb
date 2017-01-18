@@ -65,14 +65,14 @@ describe Nihaopay::Queryable do
       let(:q) { Nihaopay::Query.new }
 
       context 'when :after present in options' do
-        let(:options) { { after: '2016-06-01T01:00:00Z', limit: 5 } }
-        it { expect(q).to receive(:fetch).with(starting_after: '2016-06-01T01:00:00Z', limit: 5) }
+        let(:options) { { after: Time.parse('2016-06-01T01:00:00Z'), limit: 5 } }
+        it { expect(q).to receive(:fetch).with(starting_after: '2016-06-01T01:00:00+0000', limit: 5) }
         after { Nihaopay::Transactions::Base.fetch(options) }
       end
 
       context 'when :before present in options' do
-        let(:options) { { before: '2016-06-01T01:00:00Z', limit: 5 } }
-        it { expect(q).to receive(:fetch).with(ending_before: '2016-06-01T01:00:00Z', limit: 5) }
+        let(:options) { { before: Time.parse('2016-06-01T01:00:00Z'), limit: 5 } }
+        it { expect(q).to receive(:fetch).with(ending_before: '2016-06-01T01:00:00+0000', limit: 5) }
         after { Nihaopay::Transactions::Base.fetch(options) }
       end
 

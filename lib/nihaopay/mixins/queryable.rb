@@ -1,5 +1,7 @@
 module Nihaopay
   module Queryable
+    TIME_FORMAT = '%Y-%m-%dT%H:%M:%S%z'.freeze
+
     def self.included(base)
       base.extend(ClassMethods)
     end
@@ -14,8 +16,8 @@ module Nihaopay
       end
 
       def fetch(options = {})
-        options[:starting_after] = options.delete(:after) if options[:after]
-        options[:ending_before] = options.delete(:before) if options[:before]
+        options[:starting_after] = options.delete(:after).strftime(TIME_FORMAT) if options[:after]
+        options[:ending_before] = options.delete(:before).strftime(TIME_FORMAT) if options[:before]
         q.fetch(options)
       end
 
@@ -24,11 +26,11 @@ module Nihaopay
       end
 
       def before(time)
-        q.before(time)
+        q.before(time.strftime(TIME_FORMAT))
       end
 
       def after(time)
-        q.after(time)
+        q.after(time.strftime(TIME_FORMAT))
       end
 
       private
