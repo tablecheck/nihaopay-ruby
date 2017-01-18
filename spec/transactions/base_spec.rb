@@ -142,7 +142,7 @@ describe Nihaopay::Transactions::Base do
       it { expect(subject.transaction_id).to eq '123456' }
       it { expect(subject.token).to eq 'merchanttoken2' }
       it { expect(subject.captured).to be true }
-      it { expect(subject.time).to eq '2016-06-01T01:00:00Z' }
+      it { expect(subject.time).to eq Time.parse('2016-06-01T01:00:00Z') }
     end
 
     context 'with options with string keys' do
@@ -176,9 +176,10 @@ describe Nihaopay::Transactions::Base do
         opts.delete(:time)
         opts
       end
-      before { allow(Time).to receive_message_chain(:now, :strftime) { '2017-01-17T16:00:00+0900' } }
+      let!(:now) { Time.now }
+      before { allow(Time).to receive(:now) { now } }
       subject { described_class.build(options) }
-      it { expect(subject.time).to eq '2017-01-17T16:00:00+0900' }
+      it { expect(subject.time).to eq now }
     end
   end
 
