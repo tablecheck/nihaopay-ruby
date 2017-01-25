@@ -26,8 +26,9 @@ module Nihaopay
       Nihaopay::Transactions::Authorize.start(amount, credit_card, options)
     end
 
-    def capture(transaction_id, amount, currency)
-      Nihaopay::Transactions::Capture.start(transaction_id, amount, currency, token: token)
+    def capture(transaction_id, amount, currency, options = {})
+      options[:token] = token
+      Nihaopay::Transactions::Capture.start(transaction_id, amount, currency, options)
     end
 
     def purchase(amount, credit_card, options = {})
@@ -35,8 +36,9 @@ module Nihaopay
       Nihaopay::Transactions::Purchase.start(amount, credit_card, options)
     end
 
-    def release(transaction_id)
-      Nihaopay::Transactions::Release.start(transaction_id, token: token)
+    def release(transaction_id, options = {})
+      options[:token] = token
+      Nihaopay::Transactions::Release.start(transaction_id, options)
     end
 
     def refund(transaction_id, amount, currency, options = {})

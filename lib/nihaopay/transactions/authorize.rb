@@ -20,6 +20,7 @@ module Nihaopay
           params.merge! Nihaopay::HashUtil.slice(options, *valid_options)
           params[:capture] = capture_param
           params[:amount] = amount
+          params[:reserved] = { 'sub_mid' => options[:merchant_id].to_s } if options.key?(:merchant_id)
           params[:currency] ||= Nihaopay.currency
           params
         end

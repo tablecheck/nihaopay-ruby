@@ -167,10 +167,13 @@ For `authorize` and `purchase`, you can pass `currency`, `description`, `note`, 
 express_pay = Nihaopay::Transactions::Authorize.start(amount, credit_card, { currency: 'USD',
                                                                              description: 'Your order description',
                                                                              note: 'Something to remember',
-                                                                             reference: 'A unique alphanumeric string' })
+                                                                             reference: 'A unique alphanumeric string',
+                                                                             merchant_id: 'unique ID for nihaopay merchant' })
 ```
 
 Acceptable currency codes are 'USD' and 'JPY'.
+
+The option `merchant_id` will be passed as `{ reserved: { 'sub_mid' => merchant_id } }` in the params. All the different types of ExpressPay transactions accept this option.
 
 #### Capture a transaction
 
@@ -327,7 +330,7 @@ OR
 express_pay = nihaopay_merchant.authorize(amount, credit_card, options)
 ```
 
-`options` may include `currency`, `description`, `reference`, and `note`.
+`options` may include `currency`, `description`, `reference`, `note`, and `merchant_id`.
 
 Similarly, you can do other transactions directly on `Nihaopay::Merchant` object:
 
