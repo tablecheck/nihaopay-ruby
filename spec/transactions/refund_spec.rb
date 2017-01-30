@@ -50,7 +50,7 @@ describe Nihaopay::Transactions::Refund do
 
     context 'with options' do
       let(:options) { { reason: 'out of stock' } }
-      let(:body) { 'reason=out of stock&amount=1000&currency=JPY' }
+      let(:body) { 'amount=1000&currency=JPY&reason=out of stock' }
       it { expect(HTTParty).to receive(:post).with(url, headers: headers, body: body) }
       after { described_class.start('1111', 1000, 'JPY', options) }
     end

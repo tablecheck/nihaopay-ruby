@@ -1,21 +1,15 @@
 module Nihaopay
   module Transactions
-    class Refund < Base
-      VALID_OPTIONS = %i(reason).freeze
-
+    class Refund < Capture
       attr_accessor :refunded, :refund_transaction_id
 
       class << self
-        def start(transaction_id, amount, currency, options = {})
-          @token = options.delete(:token)
-          url = request_url(transaction_id)
-          params = Nihaopay::HashUtil.slice(options, *VALID_OPTIONS).merge(amount: amount, currency: currency)
-          response = HTTParty.post(url, headers: request_headers, body: request_body(params))
-          build_from_response!(response)
-        end
-
         def request_url(transaction_id)
           "#{base_url}/transactions/#{transaction_id}/refund"
+        end
+
+        def valid_options
+          super | %i(reason)
         end
 
         def valid_attributes
