@@ -61,6 +61,13 @@ describe Nihaopay::Transactions::Capture do
       end
     end
 
+    context 'with :sub_mid in options' do
+      let(:options) { { sub_mid: 'foobar' } }
+      let(:body) { 'amount=1000&currency=JPY&reserved={"sub_mid":"foobar"}' }
+      it { expect(HTTParty).to receive(:post).with(url, headers: headers, body: body) }
+      after { described_class.start('1111', 1000, 'JPY', options) }
+    end
+
     describe '.build_from_response!' do
       it 'should return transaction object' do
         txn = described_class.start('1111', 1000, 'JPY')
