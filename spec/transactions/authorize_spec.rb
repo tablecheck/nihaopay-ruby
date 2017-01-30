@@ -103,6 +103,22 @@ describe Nihaopay::Transactions::Authorize do
       end
     end
 
+    context 'with :sub_mid in options' do
+      let(:options) { { sub_mid: 'foobar' } }
+      let(:body) do
+        'card_number=6221558812340000'\
+        '&card_exp_year=17'\
+        '&card_exp_month=11'\
+        '&card_cvv=123'\
+        '&capture=false'\
+        '&amount=1000'\
+        '&reserved={"sub_mid":"foobar"}'\
+        '&currency=USD'
+      end
+      it { expect(HTTParty).to receive(:post).with(url, headers: headers, body: body) }
+      after { described_class.start(1000, cc, options) }
+    end
+
     describe '.build_from_response!' do
       it 'should return transaction object' do
         txn = described_class.start(1000, cc)
