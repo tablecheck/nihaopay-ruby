@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.1
+
+* API Addition: Allow sub_mid parameter (@JagdeepSingh)
+
 ## 0.2.0
 
 * API Change: Time should be returned as a Ruby time object (@JagdeepSingh)
