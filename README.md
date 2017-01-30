@@ -20,7 +20,7 @@ and run `bundle install`
 
 Add a file *config/initializers/nihaopay.rb*.
 
-``` ruby
+```ruby
 Nihaopay.configure do |nihaopay|
   nihaopay.test_mode = true
   nihaopay.token = <your-merchant-token>
@@ -121,7 +121,7 @@ response = merchant.wechat_pay(amount, currency, options)
 
 You need the credit card details for initiating the transaction. You can build the credit card object as below:
 
-``` ruby
+```ruby
 credit_card = Nihaopay::CreditCard.new(
                 number: '6221558812340000',
                 expiry_year: 2017,
@@ -133,13 +133,13 @@ Acceptable values for `expiry_month` are `01` through `12`.
 
 Now initiate the transaction using above credit card.
 
-``` ruby
+```ruby
 express_pay = Nihaopay::Transactions::Authorize.start(amount, credit_card)
 ```
 
 This returns an instance of `Nihaopay::Transactions::ExpressPay` on which you can access following methods:
 
-``` ruby
+```ruby
 express_pay.transaction_id   # => "20160714132438002485"
 express_pay.status           # => "success"
 express_pay.reference        # => "3461fcc31aec471780ad1a4dc6111947"
@@ -153,7 +153,7 @@ Other methods available are `note` and `time`.
 
 #### Purchase transaction on ExpressPay
 
-``` ruby
+```ruby
 express_pay = Nihaopay::Transactions::Purchase.start(amount, credit_card)
 ```
 
@@ -163,21 +163,21 @@ This again returns an instance of `Nihaopay::Transactions::ExpressPay`.
 
 For `authorize` and `purchase`, you can pass `currency`, `description`, `note`, and `reference` as options.
 
-``` ruby
+```ruby
 express_pay = Nihaopay::Transactions::Authorize.start(amount, credit_card, { currency: 'USD',
                                                                              description: 'Your order description',
                                                                              note: 'Something to remember',
                                                                              reference: 'A unique alphanumeric string',
-                                                                             merchant_id: 'unique ID for nihaopay merchant' })
+                                                                             sub_mid: 'unique ID for nihaopay merchant' })
 ```
 
 Acceptable currency codes are 'USD' and 'JPY'.
 
-The option `merchant_id` will be passed as `{ reserved: { 'sub_mid' => merchant_id } }` in the params. All the different types of ExpressPay transactions accept this option.
+The option `sub_mid` will be passed as a JSON string `{reserved: "{\"sub_mid\":\"XXX\"}" }` in the params. All the different types of ExpressPay transactions accept this option.
 
 #### Capture a transaction
 
-``` ruby
+```ruby
 captured = express_pay.capture
 captured.transaction_id           # => "20160718111604002633"
 captured.status                   # => "success"
@@ -188,7 +188,7 @@ captured.time                     # => 2017-01-18 12:08:42 +0900
 
 If you want to capture a partial amount, you can do:
 
-``` ruby
+```ruby
 captured = express_pay.partial_capture(amount)
 ```
 
@@ -198,7 +198,7 @@ Authorizations not captured within 30 days are automatically released and cannot
 
 Release an uncaptured transaction.
 
-``` ruby
+```ruby
 released = express_pay.release
 released.transaction_id           # => "20160718111604002633"
 released.status                   # => "success"
@@ -209,7 +209,7 @@ released.time                     # => 2017-01-18 12:08:42 +0900
 
 #### Cancel a transaction
 
-``` ruby
+```ruby
 cancelled = express_pay.cancel
 cancelled.transaction_id            # => "20160718111604002633"
 cancelled.status                    # => "success"
@@ -227,33 +227,33 @@ Transactions can only be cancelled before the daily settlement deadline. Transac
 
 Only SecurePay, ExpressPay, and Captured transactions can be returned. For details on Released, Cancelled, and Refunded transactions, please navigate to the [TMS](https://tms.nihaopay.com). Transactions are returned with the most recent transactions appearing first.
 
-``` ruby
+```ruby
 transactions = Nihaopay::Transactions::Base.fetch
 ```
 
 By default, only 10 transactions are returned at a time. This can be adjusted by calling `limit` before `fetch`. `limit` can range between 1 and 100.
 
-``` ruby
+```ruby
 transactions = Nihaopay::Transactions::Base.limit(5).fetch
 ```
 
 To retrieve transactions that were processed after the specified time, you can all `after` with `Time` object.
 
-``` ruby
+```ruby
 yesterday = Time.now - 24 * 60 * 60
 transactions = Nihaopay::Transactions::Base.after(yesterday).fetch
 ```
 
 Similarly, you can fetch the transactions that were processed before the specified time.
 
-``` ruby
+```ruby
 yesterday = Time.now - 24 * 60 * 60
 transactions = Nihaopay::Transactions::Base.before(yesterday).fetch
 ```
 
 You can chain methods to use multiple options:
 
-``` ruby
+```ruby
 yesterday = Time.now - 24 * 60 * 60
 week_ago = Time.now - 7 * 24 * 60 * 60
 transactions = Nihaopay::Transactions::Base.before(yesterday)
@@ -265,7 +265,7 @@ OR
 
 you can pass the options to `fetch`:
 
-``` ruby
+```ruby
 yesterday = Time.now - 24 * 60 * 60
 week_ago = Time.now - 7 * 24 * 60 * 60
 transactions = Nihaopay::Transactions::Base.fetch(before: yesterday,
@@ -277,7 +277,7 @@ transactions = Nihaopay::Transactions::Base.fetch(before: yesterday,
 
 Provide a unique transaction ID that was returned from a previous response in order to retrieve corresponding transaction’s details.
 
-``` ruby
+```ruby
 transaction = Nihaopay::Transactions::Base.find(transaction_id)
 transaction.transaction_id  # => "20160718111604002633"
 transaction.type            # => "charge"
@@ -292,7 +292,7 @@ Only SecurePay (UnionPay and AliPay), ExpressPay, and Captured transaction detai
 
 Full refunds can only be created once per transaction.
 
-``` ruby
+```ruby
 refunded = express_pay.refund
 refunded.transaction_id            # => "20160718111604002633"
 refunded.status                    # => "success"
@@ -303,13 +303,13 @@ refunded.time                      # => 2017-01-18 12:08:42 +0900
 
 You can pass a `reason` when refunding a transaction:
 
-``` ruby
+```ruby
 refunded = express_pay.refund(reason: 'Out of stock')
 ```
 
 Partial refunds can be created multiple times up to the amount of the Transaction.
 
-``` ruby
+```ruby
 refunded = express_pay.partial_refund(amount)
 refunded = express_pay.partial_refund(amount, reason: 'Cancellation fee')
 ```
@@ -318,7 +318,7 @@ refunded = express_pay.partial_refund(amount, reason: 'Cancellation fee')
 
 If you have multiple merchants configured to the Nihaopay payment gateway, they will have different tokens each. You can do transactions per merchant as below:
 
-``` ruby
+```ruby
 merchant_token = "6c4dc4828474fa73c5f438a9eb2fbf3092e44"
 nihaopay_merchant = Nihaopay::Merchant.new(merchant_token)
 express_pay = nihaopay_merchant.authorize(amount, credit_card)
@@ -326,15 +326,15 @@ express_pay = nihaopay_merchant.authorize(amount, credit_card)
 
 OR
 
-``` ruby
+```ruby
 express_pay = nihaopay_merchant.authorize(amount, credit_card, options)
 ```
 
-`options` may include `currency`, `description`, `reference`, `note`, and `merchant_id`.
+`options` may include `currency`, `description`, `reference`, `note`, and `sub_mid`.
 
 Similarly, you can do other transactions directly on `Nihaopay::Merchant` object:
 
-``` ruby
+```ruby
 # capture
 express_pay = nihaopay_merchant.capture(transaction_id, amount, currency)
 
@@ -345,7 +345,7 @@ express_pay = nihaopay_merchant.purchase(amount, credit_card, options)
 # release
 express_pay = nihaopay_merchant.release(transaction_id)
 
-#refund
+# refund
 express_pay = nihaopay_merchant.refund(transaction_id, amount, currency)
 express_pay = nihaopay_merchant.refund(transaction_id, amount, currency, reason: 'Cancellation fee')
 ```

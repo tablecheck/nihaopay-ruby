@@ -18,7 +18,7 @@ module Nihaopay
 
         def request_params(options = {})
           params = Nihaopay::HashUtil.slice(options, *valid_options)
-          params[:reserved] = { 'sub_mid' => options[:merchant_id].to_s } if options.key?(:merchant_id)
+          params[:reserved] = { 'sub_mid' => options[:sub_mid].to_s }.to_json if options.key?(:sub_mid)
           params
         end
 

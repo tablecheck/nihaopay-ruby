@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^spec/})
   s.require_paths = ['lib']
 
+  s.add_dependency 'json'
   s.add_dependency 'httparty', '>= 0.13'
 
   s.add_development_dependency 'bundler'
