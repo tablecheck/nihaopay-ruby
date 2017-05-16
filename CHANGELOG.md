@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## master
+
+* API Update: Support client IP to be passed for ExpressPay transactions (@JagdeepSingh)
+
 ## 0.2.1
 
 * API Addition: Allow sub_mid parameter (@JagdeepSingh)
