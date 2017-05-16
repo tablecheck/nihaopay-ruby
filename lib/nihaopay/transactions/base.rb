@@ -61,7 +61,7 @@ module Nihaopay
         end
 
         def valid_attributes
-          %i(token transaction_id type status captured currency reference amount note time)
+          %i[token transaction_id type status captured currency reference amount note time].freeze
         end
 
         def response_keys_map

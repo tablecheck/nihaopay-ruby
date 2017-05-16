@@ -72,7 +72,7 @@ describe Nihaopay::Transactions::Cancel do
   end
 
   describe '.valid_attributes' do
-    let(:expectation) { %i(transaction_id status cancelled cancel_transaction_id time) }
+    let(:expectation) { %i[transaction_id status cancelled cancel_transaction_id time] }
     it { expect(described_class.valid_attributes).to eq expectation }
   end
 

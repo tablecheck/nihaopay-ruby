@@ -21,7 +21,7 @@ module Nihaopay
         end
 
         def valid_attributes
-          %i(transaction_id status cancelled cancel_transaction_id time)
+          %i[transaction_id status cancelled cancel_transaction_id time].freeze
         end
 
         def response_keys_map

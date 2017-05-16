@@ -1,6 +1,6 @@
 module Nihaopay
   class CreditCard
-    ATTRIBUTES = %i(number expiry_year expiry_month cvv).freeze
+    ATTRIBUTES = %i[number expiry_year expiry_month cvv].freeze
 
     attr_accessor(*ATTRIBUTES)
 

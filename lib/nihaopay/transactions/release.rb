@@ -9,7 +9,7 @@ module Nihaopay
         end
 
         def valid_attributes
-          %i(transaction_id status released release_transaction_id time)
+          %i[transaction_id status released release_transaction_id time].freeze
         end
 
         def response_keys_map

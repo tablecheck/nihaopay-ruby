@@ -2,7 +2,7 @@ module Nihaopay
   class Query
     include ::Nihaopay::Api
 
-    VALID_OPTIONS = %i(limit starting_after ending_before).freeze
+    VALID_OPTIONS = %i[limit starting_after ending_before].freeze
 
     def limit(num)
       @limit = num

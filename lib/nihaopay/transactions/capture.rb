@@ -23,11 +23,11 @@ module Nihaopay
         end
 
         def valid_options
-          %i(amount currency)
+          %i[amount currency].freeze
         end
 
         def valid_attributes
-          %i(transaction_id status captured capture_transaction_id time)
+          %i[transaction_id status captured capture_transaction_id time].freeze
         end
 
         def response_keys_map

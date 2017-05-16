@@ -185,7 +185,7 @@ describe Nihaopay::Transactions::Base do
 
   describe '.valid_attributes' do
     let(:expectation) do
-      %i(token transaction_id type status captured currency reference amount note time)
+      %i[token transaction_id type status captured currency reference amount note time]
     end
     it { expect(described_class.valid_attributes).to eq expectation }
   end

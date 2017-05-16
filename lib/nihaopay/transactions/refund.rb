@@ -9,11 +9,11 @@ module Nihaopay
         end
 
         def valid_options
-          super | %i(reason)
+          (super | %i[reason]).freeze
         end
 
         def valid_attributes
-          %i(transaction_id status refunded refund_transaction_id time)
+          %i[transaction_id status refunded refund_transaction_id time].freeze
         end
 
         def response_keys_map

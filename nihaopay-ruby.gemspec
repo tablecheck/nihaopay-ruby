@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description   = 'Ruby library for Nihaopay payment gateway API'
   s.summary       = 'Ruby library for Nihaopay payment gateway API'
 
-  s.files         = Dir['{lib,spec}/**/*'] + %w(README.md CHANGELOG.md LICENSE)
+  s.files         = Dir['{lib,spec}/**/*'] + %w[README.md CHANGELOG.md LICENSE]
   s.test_files    = s.files.grep(%r{^spec/})
   s.require_paths = ['lib']
 

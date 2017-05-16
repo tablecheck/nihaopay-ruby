@@ -26,7 +26,7 @@ module Nihaopay
         end
 
         def valid_options
-          %i(currency description note reference client_ip)
+          %i[currency description note reference client_ip].freeze
         end
 
         def capture_param
