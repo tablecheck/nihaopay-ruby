@@ -1,8 +1,13 @@
 # CHANGELOG
 
-## master
+## Upcoming
+
+* Your changes here
+
+## 0.2.2
 
 * API Update: Support client IP to be passed in ExpressPay transactions ([@JagdeepSingh](https://github.com/JagdeepSingh))
+* Rubocop: Upgrade percent array literal syntax to use brackets ([@johnnyshields](https://github.com/johnnyshields))
 
 ## 0.2.1
 
