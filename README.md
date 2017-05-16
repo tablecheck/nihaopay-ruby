@@ -134,8 +134,10 @@ Acceptable values for `expiry_month` are `01` through `12`.
 Now initiate the transaction using above credit card.
 
 ```ruby
-express_pay = Nihaopay::Transactions::Authorize.start(amount, credit_card)
+express_pay = Nihaopay::Transactions::Authorize.start(amount, credit_card, client_ip: '192.x.x.x')
 ```
+
+NOTE: `client_ip` is a required parameter and replace its value with actual IP address.
 
 This returns an instance of `Nihaopay::Transactions::ExpressPay` on which you can access following methods:
 
@@ -154,7 +156,7 @@ Other methods available are `note` and `time`.
 #### Purchase transaction on ExpressPay
 
 ```ruby
-express_pay = Nihaopay::Transactions::Purchase.start(amount, credit_card)
+express_pay = Nihaopay::Transactions::Purchase.start(amount, credit_card, client_ip: '192.x.x.x')
 ```
 
 This again returns an instance of `Nihaopay::Transactions::ExpressPay`.
@@ -164,7 +166,8 @@ This again returns an instance of `Nihaopay::Transactions::ExpressPay`.
 For `authorize` and `purchase`, you can pass `currency`, `description`, `note`, and `reference` as options.
 
 ```ruby
-express_pay = Nihaopay::Transactions::Authorize.start(amount, credit_card, { currency: 'USD',
+express_pay = Nihaopay::Transactions::Authorize.start(amount, credit_card, { client_ip: '192.x.x.x',  # Required
+                                                                             currency: 'JPY',
                                                                              description: 'Your order description',
                                                                              note: 'Something to remember',
                                                                              reference: 'A unique alphanumeric string',
@@ -327,10 +330,10 @@ express_pay = nihaopay_merchant.authorize(amount, credit_card)
 OR
 
 ```ruby
-express_pay = nihaopay_merchant.authorize(amount, credit_card, options)
+express_pay = nihaopay_merchant.authorize(amount, credit_card, client_ip: '192.x.x.x')
 ```
 
-`options` may include `currency`, `description`, `reference`, `note`, and `sub_mid`.
+Other options include `currency`, `description`, `reference`, `note`, and `sub_mid`.
 
 Similarly, you can do other transactions directly on `Nihaopay::Merchant` object:
 
@@ -339,8 +342,7 @@ Similarly, you can do other transactions directly on `Nihaopay::Merchant` object
 express_pay = nihaopay_merchant.capture(transaction_id, amount, currency)
 
 # purchase
-express_pay = nihaopay_merchant.purchase(amount, credit_card)
-express_pay = nihaopay_merchant.purchase(amount, credit_card, options)
+express_pay = nihaopay_merchant.purchase(amount, credit_card, client_ip: '192.x.x.x')
 
 # release
 express_pay = nihaopay_merchant.release(transaction_id)

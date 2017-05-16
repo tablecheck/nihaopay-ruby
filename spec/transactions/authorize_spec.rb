@@ -29,23 +29,25 @@ describe Nihaopay::Transactions::Authorize do
         'captured' => false }
     end
 
-    context 'without options' do
+    context 'with client_ip' do
       let(:body) do
         'card_number=6221558812340000'\
         '&card_exp_year=17'\
         '&card_exp_month=11'\
         '&card_cvv=123'\
+        '&client_ip=192.168.0.1'\
         '&capture=false'\
         '&amount=1000'\
         '&currency=USD'
       end
       it { expect(HTTParty).to receive(:post).with(url, headers: headers, body: body) }
-      after { described_class.start(1000, cc) }
+      after { described_class.start(1000, cc, client_ip: '192.168.0.1') }
     end
 
-    context 'with options' do
+    context 'with other options' do
       let(:options) do
-        { currency: 'USD',
+        { client_ip: '192.168.0.1',
+          currency: 'USD',
           description: 'Lorem ipsum',
           note: 'To self',
           reference: '111111' }
@@ -59,6 +61,7 @@ describe Nihaopay::Transactions::Authorize do
         '&description=Lorem ipsum'\
         '&note=To self'\
         '&reference=111111'\
+        '&client_ip=192.168.0.1'\
         '&capture=false'\
         '&amount=1000'
       end
@@ -67,12 +70,13 @@ describe Nihaopay::Transactions::Authorize do
     end
 
     context 'with invalid options' do
-      let(:options) { { foo: :bar } }
+      let(:options) { { client_ip: '192.168.0.1', foo: :bar } }
       let(:body) do
         'card_number=6221558812340000'\
         '&card_exp_year=17'\
         '&card_exp_month=11'\
         '&card_cvv=123'\
+        '&client_ip=192.168.0.1'\
         '&capture=false'\
         '&amount=1000'\
         '&currency=USD'
@@ -82,7 +86,7 @@ describe Nihaopay::Transactions::Authorize do
     end
 
     context 'with :token in options' do
-      let(:options) { { token: 'ec471780ad1' } }
+      let(:options) { { client_ip: '192.168.0.1', token: 'ec471780ad1' } }
       let(:headers) do
         { 'Authorization' => 'Bearer ec471780ad1',
           'Content-Type' => 'application/x-www-form-urlencoded' }
@@ -92,6 +96,7 @@ describe Nihaopay::Transactions::Authorize do
         '&card_exp_year=17'\
         '&card_exp_month=11'\
         '&card_cvv=123'\
+        '&client_ip=192.168.0.1'\
         '&capture=false'\
         '&amount=1000'\
         '&currency=USD'
@@ -104,12 +109,13 @@ describe Nihaopay::Transactions::Authorize do
     end
 
     context 'with :sub_mid in options' do
-      let(:options) { { sub_mid: 'foobar' } }
+      let(:options) { { client_ip: '192.168.0.1', sub_mid: 'foobar' } }
       let(:body) do
         'card_number=6221558812340000'\
         '&card_exp_year=17'\
         '&card_exp_month=11'\
         '&card_cvv=123'\
+        '&client_ip=192.168.0.1'\
         '&capture=false'\
         '&amount=1000'\
         '&reserved={"sub_mid":"foobar"}'\
@@ -121,7 +127,7 @@ describe Nihaopay::Transactions::Authorize do
 
     describe '.build_from_response!' do
       it 'should return transaction object' do
-        txn = described_class.start(1000, cc)
+        txn = described_class.start(1000, cc, client_ip: '192.168.0.1')
         expect(txn).to be_a Nihaopay::Transactions::Base
         expect(txn.transaction_id).to eq '20160714132438002485'
         expect(txn.status).to eq 'success'
