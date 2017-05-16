@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency 'json', '>= 1'
-  s.add_dependency 'httparty', '>= 0.13'
+  s.add_dependency 'httparty', '~> 0.14.0'
 
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rake'
