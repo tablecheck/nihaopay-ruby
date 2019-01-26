@@ -1,10 +1,10 @@
 # Nihaopay Ruby
 
-[![Build Status](https://travis-ci.org/kkvesper/nihaopay-ruby.svg?branch=master)](https://travis-ci.org/kkvesper/nihaopay-ruby)
+[![Build Status](https://travis-ci.org/tablecheck/nihaopay-ruby.svg?branch=master)](https://travis-ci.org/tablecheck/nihaopay-ruby)
 
 Nihaopay Ruby is a Ruby wrapper for using the [Nihaopay](https://www.nihaopay.com) payment gateway API.
 
-This library is provided by [KK VESPER](https://www.kkvesper.jp/) and is not affiliated
+This library is provided by [TableCheck](https://corp.tablecheck.com) and is not affiliated
 with or supported by [Aurfy Inc](https://www.nihaopay.com), makers of Nihaopay.
 
 
@@ -355,6 +355,6 @@ express_pay = nihaopay_merchant.refund(transaction_id, amount, currency, reason:
 
 ## License
 
-This library is provided by [KK VESPER](https://www.kkvesper.jp/) under the MIT License. Refer to LICENSE for details.
+This library is provided by [TableCheck](https://corp.tablecheck.com) under the MIT License. Refer to LICENSE for details.
 
 NihaoPay is trademark of [Aurfy Inc](https://www.nihaopay.com). Aurfy Inc does not provide, support, or endorse this library.
