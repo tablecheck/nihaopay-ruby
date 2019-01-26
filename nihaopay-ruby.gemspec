@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name          = 'nihaopay-ruby'
   s.version       = Nihaopay::VERSION
   s.authors       = ['JagdeepSingh', 'Johnny Shields']
-  s.email         = ['jagdeepsingh.fof@gmail.com', 'johnny.shields@gmail.com']
+  s.email         = ['jagdeepsingh.fof@gmail.com', 'shields@tablecheck.com']
   s.description   = 'Ruby library for Nihaopay payment gateway API'
   s.summary       = 'Ruby library for Nihaopay payment gateway API'
 
